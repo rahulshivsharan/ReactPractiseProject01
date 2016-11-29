@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<!-- The core React library -->
+		<script src="https://unpkg.com/react@15.4.0/dist/react.js"></script>
+		<!-- The ReactDOM Library -->
+		<script src="https://unpkg.com/react-dom@15.4.0/dist/react-dom.js"></script>	
+		
+	</head>
+	<body>
+		<div id="myApp01"></div>
+		<div id="myApp02"></div>
+		<script type="text/javaScript">
+			var appNode1 = document.getElementById("myApp01");
+			var appNode2 = document.getElementById("myApp02");
+
+			ReactDOM.render(React.DOM.h1({
+				id : "myHeadingH1"
+			},"Hello World"),appNode1);
+
+			
+			ReactDOM.render(React.DOM.h1({
+				style : {
+					color : 'red'
+				}
+			},"How are You"),appNode2);
+		</script>
+	</body>
+</html>
