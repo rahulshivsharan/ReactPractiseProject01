@@ -4,15 +4,17 @@
 		<!-- The core React library -->
 		<script src="https://unpkg.com/react@15.4.0/dist/react.js"></script>
 		<!-- The ReactDOM Library -->
-		<script src="https://unpkg.com/react-dom@15.4.0/dist/react-dom.js"></script>	
-		
+		<script src="https://unpkg.com/react-dom@15.4.0/dist/react-dom.js"></script>			
 	</head>
 	<body>
 		<div id="myApp01"></div>
 		<div id="myApp02"></div>
+		<div id="myApp03"></div>
 		<script type="text/javaScript">
 			var appNode1 = document.getElementById("myApp01");
 			var appNode2 = document.getElementById("myApp02");
+			var appNode3 = document.getElementById("myApp03");
+
 
 			ReactDOM.render(React.DOM.h1({
 				id : "myHeadingH1"
@@ -24,6 +26,19 @@
 					color : 'red'
 				}
 			},"How are You"),appNode2);
+
+			ReactDOM.render(React.DOM.p({
+				style : {
+					'font-size' : '20px',
+					'color' : 'blue',
+					'font-weight' : 'bold'
+				}
+			},React.DOM.span({
+				style : {
+					'color' : "red",
+					'font-size' : '100px'
+				}
+			},"Hello "),"World"),appNode3);
 		</script>
 	</body>
 </html>
