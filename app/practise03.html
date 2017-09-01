@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>React Template</title>			
+	</head>
+	<body>
+		<!-- Body Content -->
+		<div id="mainContainer"></div>
+		<!-- The core React library -->
+		<script src="/node_modules/react/dist/react.min.js"></script>
+		<!-- The ReactDOM Library -->
+		<script src="/node_modules/react-dom/dist/react-dom.min.js"></script>
+		
+		<script type="text/javaScript">
+			(function(){
+				'use strict'
+				// custom javaScript content
+				var containerElement = document.getElementById("mainContainer");
+
+				var siblingElement01 = React.DOM.span({
+					"style" : {
+						"color" : "#191970",
+						"font-size" : "20em"
+					}
+				},"ANT");
+
+				var siblingElement02 = React.DOM.span({
+					"style" : {
+						"color" : "#808000",
+						"font-size" : "5em"
+					}
+				},"MAN");
+
+				var parentElement = React.DOM.div({
+					"style" : {
+						"font-weight" : "bold"
+					}
+				},siblingElement01,siblingElement02);
+				
+				ReactDOM.render(parentElement,containerElement);
+			})();	
+		</script>
+	</body>
+</html>
