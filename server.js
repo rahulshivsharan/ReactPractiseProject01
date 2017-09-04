@@ -1,7 +1,7 @@
 var connect = require("connect");
 var serveStatic = require("serve-static");
 var app = connect();
-var PORT = 3131;
+var PORT = 3333;
 
 function sayHello(request,response,next){
 	response.setHeader("Content-type","text/plain");
