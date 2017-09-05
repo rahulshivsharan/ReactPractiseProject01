@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>React Template</title>
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">			
+	</head>
+	<body>
+		<!-- Body Content -->
+		<div id="mainContainer" class="w3-container"></div>
+
+		<!-- The core React library -->
+		<script src="/node_modules/react/dist/react.min.js"></script>
+		<!-- The ReactDOM Library -->
+		<script src="/node_modules/react-dom/dist/react-dom.min.js"></script>
+		
+		<script type="text/javaScript">
+			(function(){
+				'use strict'
+				// custom javaScript content
+
+				var employeeList = [];
+				employeeList.push({ "name" : "Petre Thiel", "profession" : "Musician", "salary/hr" : "60 USD" });
+				employeeList.push({ "name" : "John Novano", "profession" : "Lawyer", "salary/hr" : "100 USD" });
+				employeeList.push({ "name" : "Caleb Keats", "profession" : "Electrician", "salary/hr" : "40 USD" });
+				employeeList.push({ "name" : "Chris Prat", "profession" : "Security Gaurd", "salary/hr" : "20 USD" });
+				employeeList.push({ "name" : "Joshua Hiens", "profession" : "Butler", "salary/hr" : "27 USD" });
+				employeeList.push({ "name" : "Tim Robbins", "profession" : "Physical Trainer", "salary/hr" : "50 USD" });
+				employeeList.push({ "name" : "George Aptik", "profession" : "Laboritory Technician", "salary/hr" : "50 USD" });
+
+				 
+
+				// creating table row list
+				// on the basis of employee list				
+				var trElementList = (function(list){
+					var trList = [], 
+						trElement = undefined,
+						trElementCreator = trElementCreator,
+						employeeElement = undefined;
+					
+					// creating the row with table-header element
+					var tableHeaderCreator = (function(obj){
+						var thList = [], 
+							thElement = null;
+
+						for(var prop in obj){
+							thElement = React.createElement('th',null,prop.toUpperCase());
+							thList.push(thElement);
+						} // end of for
+
+						return React.createElement('tr',null,thList);
+					})(list[0]);
+
+					trList.push(tableHeaderCreator); // add row containing table-header element to row list
+
+					
+					// iterating through employee list and
+					// creating row for each employee
+					for(var x = 0; x < list.length; x++){
+						
+						employeeElement = list[x];
+
+						trElement = (function(employee){
+							var trComp = trElementCreator(employee); // create row per employee
+							return trComp;
+						})(employeeElement);
+
+						trList.push(trElement);
+					} // end of for
+
+					return trList; // returns row list
+
+
+					function trElementCreator(obj){
+						var tdList = [], 
+							tdElement = undefined;
+
+						for(var prop in obj){
+							tdElement = React.createElement('td',null,obj[prop]); 
+							tdList.push(tdElement);
+						} // end of for
+
+						var trComponent = React.createClass({
+							render : function(){
+								return React.createElement('tr',null,tdList);
+							}
+						});
+
+						return React.createElement(trComponent);
+					} // end of trElementCreator
+
+				})(employeeList);
+
+				var tableCaptionElement = React.createElement('caption',null,"Employee Information"); 
+ 				var tableComponent = React.createClass({
+					render : function(){
+						return React.createElement("table",{
+							"className" : "w3-table w3-table-all"
+						},tableCaptionElement,trElementList);
+					}
+				});
+
+				ReactDOM.render(React.createElement(tableComponent),document.getElementById("mainContainer"));
+
+			})();	
+		</script>
+	</body>
+</html>
