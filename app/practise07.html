@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>React Template</title>			
+	</head>
+	<body>
+		<!-- Body Content -->
+		<div id="mainContainer"></div>
+
+		<!-- The core React library -->
+		<script src="/node_modules/react/dist/react.min.js"></script>
+		<!-- The ReactDOM Library -->
+		<script src="/node_modules/react-dom/dist/react-dom.min.js"></script>
+		
+		<script type="text/javaScript">
+			(function(){
+				'use strict'
+				// custom javaScript content
+
+				var studentList = [];
+				studentList.push({ "name" : "Petre Thiel" });
+				studentList.push({ "name" : "John Novano" });
+				studentList.push({ "name" : "Caleb Keats" });
+				studentList.push({ "name" : "Chris Prat" });
+				studentList.push({ "name" : "Joshua Hiens" });
+				studentList.push({ "name" : "Tim Robbins" });
+				studentList.push({ "name" : "Christopher Olive" });
+
+				var mainContainer = document.getElementById("mainContainer");
+
+				var StudentListComponent = React.createClass({
+					render : function(){
+						var listElementArray = [],
+							listElement = undefined;
+						for(var i = 0; i < studentList.length; i++){
+							listElement = React.DOM.li(null,studentList[i]["name"]);
+							listElementArray.push(listElement);
+						}
+						var orderedList = React.DOM.ul(null,listElementArray);
+						return orderedList;
+					}
+				});
+
+				ReactDOM.render(React.createElement(StudentListComponent),mainContainer);
+			})();	
+		</script>
+	</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>React Template</title>			
+	</head>
+	<body>
+		<!-- Body Content -->
+		<div id="mainContainer"></div>
+
+		<!-- The core React library -->
+		<script src="/node_modules/react/dist/react.min.js"></script>
+		<!-- The ReactDOM Library -->
+		<script src="/node_modules/react-dom/dist/react-dom.min.js"></script>
+		
+		<script type="text/javaScript">
+			(function(){
+				'use strict'
+				// custom javaScript content
+
+				var mainContainer = document.getElementById("mainContainer");
+
+				var MyComponent = React.createClass({
+					render : function(){
+						return React.DOM.span(null,"This is Custom Component");
+					}
+				});
+
+				ReactDOM.render(React.createElement(MyComponent),mainContainer);
+			})();	
+		</script>
+	</body>
+</html>
