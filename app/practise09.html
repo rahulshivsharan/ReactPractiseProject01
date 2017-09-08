@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>React Template</title>			
+	</head>
+	<body>
+		<!-- Body Content -->
+		<div id="mainContainer"></div>
+		<!-- The core React library -->
+		<script src="/node_modules/react/dist/react.min.js"></script>
+		<!-- The ReactDOM Library -->
+		<script src="/node_modules/react-dom/dist/react-dom.min.js"></script>
+		
+		<script type="text/javaScript">
+			(function(){
+				'use strict'
+				// custom javaScript content
+				var myComponent = React.createClass({
+					"render" : function(){
+						var domElement = React.DOM.li(null,"Addd");
+						return domElement;
+					}
+				});
+
+				var myComponentFactory = React.createFactory(myComponent);
+
+				var ulElement = React.createElement("ul",null,	myComponentFactory(),
+																myComponentFactory(),
+																myComponentFactory(),
+																myComponentFactory(),
+																myComponentFactory(),
+																myComponentFactory());
+
+				ReactDOM.render(ulElement,document.getElementById("mainContainer"));
+			})();	
+		</script>
+	</body>
+</html>
