@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>React Template</title>	
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">			
+	</head>
+	<body>
+		<!-- Body Content -->
+		<div id="mainContainer"></div>
+		<!-- The core React library -->
+		<script src="/node_modules/react/dist/react.min.js"></script>
+		<!-- The ReactDOM Library -->
+		<script src="/node_modules/react-dom/dist/react-dom.min.js"></script>
+		
+		<script type="text/javaScript">
+			(function(){
+				'use strict'
+
+				var employeeList = [],
+					listOfRows = [], 
+					rowComponentObject = undefined;	
+
+				employeeList.push({ "name" : "Petre Thiel", "profession" : "Musician", "salary/hr" : "6 USD" });
+				employeeList.push({ "name" : "John Novano", "profession" : "Lawyer", "salary/hr" : "60 USD" });
+				employeeList.push({ "name" : "Caleb Keats", "profession" : "Electrician", "salary/hr" : "4 USD" });
+				employeeList.push({ "name" : "Chris Prat", "profession" : "Security Gaurd", "salary/hr" : "2 USD" });
+				employeeList.push({ "name" : "Joshua Hiens", "profession" : "Butler", "salary/hr" : "5 USD" });
+				employeeList.push({ "name" : "Tim Robbins", "profession" : "Physical Trainer", "salary/hr" : "7 USD" });
+				employeeList.push({ "name" : "George Aptik", "profession" : "Laboritory Technician", "salary/hr" : "11 USD" });
+				
+
+				// custom javaScript content
+				var tableComponent = React.createClass({
+					"render" : function(){
+						var employeeList = this.props["employeeList"],
+							rowElementList = [],
+							colElementList = [], 
+							columnElement = undefined,
+							empObject = undefined;
+						
+						var captionElement = React.createElement("caption",null,"Employee List"); // create caption element
+
+						// creating a header row
+						var headerRow = React.createElement("tr",
+															null,
+															React.createElement("th",null,"Name"),
+															React.createElement("th",null,"Profession"),
+															React.createElement("th",null,"Salary"));
+						rowElementList.push(headerRow);
+
+
+						for(var x = 0; x < employeeList.length; x++){
+							empObject = employeeList[x];
+							
+							// create a list of column list
+							colElementList = [];
+							for(var prop in empObject){
+								columnElement = React.createElement("td",null,empObject[prop]);
+								colElementList.push(columnElement);
+							}// end of for-loop for column
+
+							// create row list
+							rowElementList.push(React.createElement("tr",null,colElementList));	
+						} // end of for-loop for row list		
+
+						
+						return  React.createElement("table",{
+									"className" : "w3-table w3-table-all"
+								},
+								captionElement,
+								rowElementList);
+
+					} // end of render 
+				});
+					
+				
+				
+				
+				var tableElement = React.createElement(tableComponent,{ "employeeList" : employeeList });
+				
+				ReactDOM.render(tableElement,document.getElementById("mainContainer"));
+
+				
+			})();	
+		</script>
+	</body>
+</html>
