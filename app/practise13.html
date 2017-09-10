@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>React Template</title>
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<style type="text/css">
+			.mywidth{
+				width : 50%;
+			} 
+		</style>			
+	</head>
+	<body>
+		<!-- Body Content -->
+		<div class="w3-container">
+			<div id="mainContainer"></div>	
+		</div>
+		<!-- Body Content -->
+
+		<!-- The core React library -->
+		<script src="/node_modules/react/dist/react.min.js"></script>
+		<!-- The ReactDOM Library -->
+		<script src="/node_modules/react-dom/dist/react-dom.min.js"></script>
+		
+		<script type="text/javaScript">
+			(function(){
+				'use strict'
+				// custom javaScript content
+
+				var TextAreaCounter = React.createClass({
+					"propTypes" : {
+						"textContent" : React.PropTypes.string
+					},
+					"getDefaultProps" : function(){
+						return {
+							"textContent" : ""
+						}
+					},
+					"getInitialState" : function(){
+						return {
+							"textContent" : this.props.textContent
+						}
+					},
+					"_textChange" : function(evt){
+
+						this.setState({
+							textContent : evt.target.value
+						});
+
+					},
+					"render" : function(){
+						var TextAreaElement = React.createElement("textarea",{							
+							"className" : "mywidth",
+							"value" : this.state.textContent,
+							"onChange" : this._textChange							
+						});
+
+						var HeaderElement = React.createElement("h3",null,this.state.textContent.length);
+
+						var DivElement = React.createElement("div",null,TextAreaElement,HeaderElement)
+						return DivElement;
+					}
+				});
+
+				var TextAreaElement = React.createElement(TextAreaCounter,{ "textContent" : "Rahul" });
+				
+				ReactDOM.render(TextAreaElement,document.getElementById("mainContainer"));
+			})();	
+		</script>
+	</body>
+</html>
