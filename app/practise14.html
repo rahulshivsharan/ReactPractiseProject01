@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>React Template</title>
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">		
+		<style type="text/css">
+			.mywidth{
+				width : 50%;
+			} 
+		</style>	
+	</head>
+	<body>
+		<!-- Body Content -->
+			<div id="mainContent"></div>
+		<!-- Body Content -->
+
+		<!-- The core React library -->
+		<script src="/node_modules/react/dist/react.min.js"></script>
+		<!-- The ReactDOM Library -->
+		<script src="/node_modules/react-dom/dist/react-dom.min.js"></script>
+		
+		<script type="text/javaScript">
+			(function(){
+				'use strict'
+				// custom javaScript content
+
+				var DataFeedComponent = React.createClass({
+					propTypes : {
+						"content" : React.PropTypes.string.isRequired
+					},
+					getDefaultProps : function(){
+						return {
+							"content" : ""
+						}
+					},
+					getInitialState : function(){
+						return {
+							"content" : this.props.content
+						}
+					},
+					doRenderingUI : function(evt){												
+						this.setState({
+							content : evt.target.value
+						});
+					},
+					render : function(){
+						var TextAreaElement = React.createElement("textarea",{
+							"className" : "mywidth",
+							"value" : this.state.content,
+							"onChange" : this.doRenderingUI
+						});
+
+						var listElementArray = [];
+
+						var someContent = this.state.content.split(",");
+
+						for(var x = 0; x < someContent.length; x++){
+							
+							if(someContent[x] !== undefined && someContent[x] !== null && someContent[x] !== ""){
+								listElementArray.push(React.createElement("li",null,someContent[x]));	
+							}								
+							
+						} // end of for
+
+						var orderedListingElement =  React.createElement("ol",null,listElementArray);
+
+						var DivElement = React.createElement("div",null,TextAreaElement,orderedListingElement);
+						return DivElement;
+					}
+				});
+
+				
+
+				var elementObject = React.createElement(DataFeedComponent,{ "content" : "Rahul,Aslam" });
+
+				ReactDOM.render(elementObject,document.getElementById("mainContent"));
+			})();	
+		</script>
+	</body>
+</html>
