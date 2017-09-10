@@ -31,7 +31,11 @@
 
 				// custom javaScript content
 				var tableComponent = React.createClass({
+					"propTypes" : {
+						"employeeList" : React.PropTypes.array.isRequired
+					},
 					"render" : function(){
+
 						var employeeList = this.props["employeeList"],
 							rowElementList = [],
 							colElementList = [], 
