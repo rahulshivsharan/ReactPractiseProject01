@@ -26,7 +26,7 @@
 
 				var DataFeedComponent = React.createClass({
 					propTypes : {
-						"content" : React.PropTypes.string.isRequired
+						"defaultValue" : React.PropTypes.string.isRequired
 					},
 					getDefaultProps : function(){
 						return {
@@ -35,7 +35,7 @@
 					},
 					getInitialState : function(){
 						return {
-							"content" : this.props.content
+							"content" : this.props.defaultValue
 						}
 					},
 					doRenderingUI : function(evt){												
@@ -71,7 +71,7 @@
 
 				
 
-				var elementObject = React.createElement(DataFeedComponent,{ "content" : "Rahul,Aslam" });
+				var elementObject = React.createElement(DataFeedComponent,{ "defaultValue" : "Rahul,Aslam" });
 
 				ReactDOM.render(elementObject,document.getElementById("mainContent"));
 			})();	
