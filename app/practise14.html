@@ -26,28 +26,37 @@
 
 				var DataFeedComponent = React.createClass({
 					propTypes : {
-						"defaultValue" : React.PropTypes.string.isRequired
+						"initialValue" : React.PropTypes.string.isRequired
 					},
 					getDefaultProps : function(){
+						console.log("getDefaultProps ");
 						return {
 							"content" : ""
 						}
 					},
 					getInitialState : function(){
+						console.log("getInitialState ",this.props.initialValue);
 						return {
-							"content" : this.props.defaultValue
+							"content" : this.props.initialValue
 						}
 					},
-					doRenderingUI : function(evt){												
+					doRenderingUI : function(evt){							
+						console.log("doRenderingUI on event ");					
 						this.setState({
 							content : evt.target.value
 						});
 					},
+					/*
+						if "defaultValue" property is changed to "value" then
+						on 'onBlur' event the new values are not applied as the re-rendering
+						again renders the component with values assigned to componenet with "defaultValue" 
+					*/
 					render : function(){
+						console.log("render method called... ");
 						var TextAreaElement = React.createElement("textarea",{
 							"className" : "mywidth",
-							"value" : this.state.content,
-							"onChange" : this.doRenderingUI
+							"initialValue" : this.state.content, 
+							"onBlur" : this.doRenderingUI
 						});
 
 						var listElementArray = [];
@@ -62,16 +71,15 @@
 							
 						} // end of for
 
-						var orderedListingElement =  React.createElement("ol",null,listElementArray);
+						var orderedListingElement = React.createElement("ol",null,listElementArray);
 
 						var DivElement = React.createElement("div",null,TextAreaElement,orderedListingElement);
 						return DivElement;
 					}
 				});
-
 				
 
-				var elementObject = React.createElement(DataFeedComponent,{ "defaultValue" : "Rahul,Aslam" });
+				var elementObject = React.createElement(DataFeedComponent,{ "initialValue" : "Victor,Nick" });
 
 				ReactDOM.render(elementObject,document.getElementById("mainContent"));
 			})();	
