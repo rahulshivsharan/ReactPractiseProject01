@@ -1,0 +1,121 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>React Template</title>
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">			
+	</head>
+	<body>
+		<!-- Body Content -->
+			<div class="w3-container" style="margin-top:2%;">
+				<div class="w3-row">
+					<div class="w3-col m2">&nbsp;</div>
+					<div class="w3-col m8">
+						<form class="w3-container">
+							<label>Name</label>
+							<input type="text" class="w3-input" id="customerName" />
+
+							<label>Profession</label>
+							<input type="text" class="w3-input" id="profession" />
+							<br/>
+							<button class="w3-btn w3-blue" type="button" id="customerBtn">Enter</button>
+						</form>	
+						<br/>
+						<div id="mainContainer"></div>	
+					</div>
+					<div class="w3-col m2">&nbsp;</div>
+				</div>					
+			</div>
+			
+		<!-- Body Content -->
+
+		<!-- The core React library -->
+		<script src="/node_modules/react/dist/react.min.js"></script>
+		<!-- The ReactDOM Library -->
+		<script src="/node_modules/react-dom/dist/react-dom.min.js"></script>
+		
+		<script type="text/javaScript">
+			(function(){
+				'use strict'
+				// custom javaScript content
+				
+				var myCustomerList = [];
+				
+				myCustomerList.push({
+					"name" : "Austin Pits",
+					"profession" : "Carpenter"
+				});
+
+				// Creating the customer table component
+				// and passing initial value
+				var customerTableComponent = React.createClass({
+					propTypes : {
+						"initialValue" : React.PropTypes.array.isRequired
+					},
+					getDefaultProps : function(){
+						return {
+							"list" : myCustomerList 
+						}
+					},
+					getInitialState : function(){
+						return {
+							"list" : this.props.initialValue
+						}
+					},
+					render : function(){
+						var rowElementList = [], 
+							columnElement = undefined, 
+							rowElement = undefined,
+							customerList = this.state.list,
+							customerObject = undefined,
+							headerRow = undefined;
+
+
+						headerRow = React.createElement("tr",
+														null,
+														React.createElement("th",null,"Name"),
+														React.createElement("th",null,"Profession"));	
+						rowElementList.push(headerRow);	
+						
+						for(var x = 0; x < customerList.length; x++){
+
+							rowElement = React.createElement("tr",
+															null,
+															React.createElement("td",null,customerList[x]["name"]),
+															React.createElement("td",null,customerList[x]["profession"]));
+
+							rowElementList.push(rowElement);
+						} // end of for	
+
+						var captionElement = React.createElement("caption",{
+							"style" : {
+								"font-weight" : "bold"
+							}
+						},"Customer Table");
+
+						return React.createElement("table",{
+							"className" : "w3-table w3-table-all"
+						},captionElement,rowElementList);
+					} // end of render
+				}); // end of customerTableComponent
+
+				var customerTableElement = React.createElement(customerTableComponent,{ "initialValue" : myCustomerList});
+				
+				var tableElementRef = ReactDOM.render(customerTableElement,document.getElementById("mainContainer"));
+
+				document.getElementById("customerBtn").addEventListener("click",function(){
+					myCustomerList.push({
+						"name" : document.getElementById("customerName").value,
+						"profession" : document.getElementById("profession").value
+					});
+
+					document.getElementById("customerName").value = "";
+					document.getElementById("profession").value = "";
+
+					tableElementRef.setState({
+						"initialValue" : myCustomerList
+					});
+				});
+			})();	
+		</script>
+	</body>
+</html>
