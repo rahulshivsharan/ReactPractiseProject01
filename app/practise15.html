@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>React Template</title>
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<style type="text/css">
+			.par{
+				color : "blue";
+				font-weight : "bold";
+			}
+		</style>			
+	</head>
+	<body>
+		<!-- Body Content -->
+			<div id="mainContent"></div>
+		<!-- Body Content -->
+		<!-- The core React library -->
+		<script src="/node_modules/react/dist/react.min.js"></script>
+		<!-- The ReactDOM Library -->
+		<script src="/node_modules/react-dom/dist/react-dom.min.js"></script>
+		
+		<script type="text/javaScript">
+			(function(){
+				'use strict'
+				// custom javaScript content
+				var DemoComponent = React.createClass({
+					"propTypes" : {
+						"textContent" : React.PropTypes.string.isRequired
+					},
+					getDefaultProps : function(){
+						return {
+							"textContent" : "Default Text Content"
+						}
+					},
+					getInitialState : function(){
+						return {
+							"textContent" : this.props.textContent
+						}
+					},
+					render : function(){
+						var paragraphElement = React.createElement("p",{
+							"className" : "par"
+						},this.state.textContent);
+
+						return paragraphElement;
+					}
+				});
+
+				var pElement = React.createElement(DemoComponent,{
+					"textContent" : "This is a demo component"
+				});
+
+				var demoReference = ReactDOM.render(pElement,document.getElementById("mainContent"));
+
+				var x = 0;
+				setInterval(function(){
+					
+					demoReference.setState({
+						"textContent" : "New State "+(++x)
+					});
+				},2000);
+
+
+			})();	
+		</script>
+	</body>
+</html>
