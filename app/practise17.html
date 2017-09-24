@@ -57,6 +57,11 @@
 							"list" : this.props.initialValue
 						}
 					},
+					componentWillReceiveProps : function(newProps){
+						this.setState({
+							"list" : newProps.initialValue
+						});
+					},
 					render : function(){
 						var rowElementList = [],
 							columnElement = undefined,
@@ -112,7 +117,7 @@
 					document.getElementById("employeeName").value = "";
 					document.getElementById("profession").value = "";
 
-					employeeElementRef.setState({
+					employeeElementRef.componentWillReceiveProps({
 						"initialValue" : employeeList
 					});					
 				});
