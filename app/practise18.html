@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>React Template</title>
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">			
+	</head>
+	<body>
+		<!-- Body Content -->
+
+		<div class="w3-container"  style="margin-top:3%">
+			<div class="w3-row">
+				<div class="w3-col m12">
+					<div class="w3-row">
+						<div class="w3-col m2">&nbsp;</div>
+						<div class="w3-col m5">
+							<div id="mainContainer"></div>
+						</div>						
+					</div>		
+				</div>
+			</div>	
+		</div>
+
+		<!-- Body Content -->
+
+		<!-- The core React library -->
+		<script src="/node_modules/react/dist/react.min.js"></script>
+		<!-- The ReactDOM Library -->
+		<script src="/node_modules/react-dom/dist/react-dom.min.js"></script>
+		
+		<script type="text/javaScript">
+			(function(){
+				'use strict'
+				// custom javaScript content
+
+				var CounterComponent = React.createClass({
+					name : "CounterComponent",
+					propType : {
+						"initialValue" : React.PropTypes.number.isRequired
+					},
+					render : function(){
+						return React.createElement("h3",null,this.props.initialValue);
+					}
+				});
+
+				var TextAreaComponent = React.createClass({
+					name : "TextAreaComponent",
+					propType : {
+						"initialValue" : React.PropTypes.string.isRequired
+					},
+					getDefaultProps : function(){
+						return {
+							"text" : ""
+						}
+					},
+					getInitialState : function(){
+						return {
+							"text" : this.props.initialValue
+						}
+					},
+					_textChange : function(evt){
+						this.setState({
+							"text" : evt.target.value
+						});
+					},
+					render : function(){
+						var num = this.state.text.length;
+						var counterElement = null;
+						
+						if(num > 0){
+							counterElement = React.createElement(CounterComponent,{
+								"initialValue" : num
+							});	
+						}
+						
+						
+						var textAreaElement = React.createElement("textarea",{
+							value : this.state.text,
+							onChange : this._textChange
+						});
+
+						return React.createElement("div",null,textAreaElement,counterElement);
+					}
+				});
+
+				ReactDOM.render(React.createElement(TextAreaComponent,{
+					"initialValue" : "Suzan"
+				}),document.getElementById("mainContainer"));
+			})();	
+		</script>
+	</body>
+</html>
