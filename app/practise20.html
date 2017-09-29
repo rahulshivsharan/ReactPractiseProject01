@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>React Template</title>
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">			
+	</head>
+	<body>
+		<!-- Body Content -->
+
+		<div class="w3-container"  style="margin-top:3%">
+			<div class="w3-row">
+				<div class="w3-col m12">
+					<div class="w3-row">
+						<div class="w3-col m2">&nbsp;</div>
+						<div class="w3-col m8">
+							<div id="mainContainer"></div>
+						</div>
+						<div class="w3-col m2">&nbsp;</div>						
+					</div>		
+				</div>
+			</div>	
+		</div>
+
+		<!-- Body Content -->
+
+		<!-- The core React library -->
+		<script src="/node_modules/react/dist/react.min.js"></script>
+		<!-- The ReactDOM Library -->
+		<script src="/node_modules/react-dom/dist/react-dom.min.js"></script>
+		
+		<script type="text/javaScript">
+			(function(){
+				'use strict'
+				// custom javaScript content
+
+				var headerList = ['Book', 'Author', 'Language', 'Published', 'Sales'];
+				
+				var data = [
+				  ['The Lord of the Rings', 'J. R. R. Tolkien','English', '1954–1955', '150 million'],
+				  ['Le Petit Prince (The Little Prince)', 'Antoine de Saint-Exupéry','French', '1943', '140 million'],
+				  ["Harry Potter and the Philosopher's Stone", 'J. K. Rowling','English', '1997', '107 million'],
+				  ['And Then There Were None', 'Agatha Christie','English', '1939', '100 million'],
+				  ['Dream of the Red Chamber', 'Cao Xueqin','Chinese', '1754–1791', '100 million'],
+				  ['The Hobbit', 'J. R. R. Tolkien','English', '1937', '100 million'],
+				  ['She: A History of Adventure', 'H. Rider Haggard','English', '1887', '100 million'],
+				  ['3 Mistakes of my life', 'Chetan Bhagat','English', '2006', '2 million'],
+				  ['One night at call center', 'Chetan Bhagat','English', '2002', '7 million'],
+				  ['2 States', 'Chetan Bhagat','English', '2007', '8 million']
+				];
+
+				var ExcelComponent = React.createClass({
+					propTypes : {
+						"initialHeaderData" : React.PropTypes.arrayOf(React.PropTypes.string),
+						"initialData" : React.PropTypes.arrayOf(React.PropTypes.string)
+					},
+					getInitialState : function(){
+						return {
+							"bookData" : this.props.initialData,
+							"headers" : this.props.initialHeaderData
+						}
+					},
+					_sort : function(evt){
+						
+						var columnIndex = 0;
+						
+						for(var x = 0; x < headerList.length; x++){
+							
+							if(evt.target.firstChild.nodeValue.includes(headerList[x])){
+								columnIndex = x;
+								break;
+							}
+						} // end of for
+
+						var data = this.state.bookData.slice();
+
+						data.sort(function(book1,book2){
+							return (book1[columnIndex] > book2[columnIndex]) ? 1 : 0; 
+						});
+
+						
+						this.setState({ "bookData" : data });
+					},
+					render : function(){
+						
+						
+						var tableHeaderElement = (function(excepComponentObject){
+							
+							return excepComponentObject.state.headers.map(function(headerLabel){
+								
+								return React.createElement("th",{
+									onClick : excepComponentObject._sort
+								},headerLabel);
+							});
+
+						})(this);
+						
+						var rowElementList = this.state.bookData.map(function(bookInfo){
+							var columnElementList = bookInfo.map(function(info){
+								return React.createElement("td",null,info);
+							});
+
+							return React.createElement("tr",null,columnElementList);
+						});
+						
+						var headerRowElement = React.createElement("tr",{
+							"style" : {
+								"color" : "white",
+								"background-color" : '#4B0082'
+							}
+						},tableHeaderElement);
+
+
+						
+						return React.createElement("table",{
+							"className" : "w3-table w3-table-all"
+						},headerRowElement,rowElementList);
+					} // end of render function
+				}); // end of ExcelComponent		
+
+				var tableElement = React.createElement(ExcelComponent,{
+					"initialHeaderData" : headerList,
+					"initialData" : data
+				});
+				ReactDOM.render(tableElement,document.getElementById("mainContainer"));		
+			})();	
+		</script>
+	</body>
+</html>
