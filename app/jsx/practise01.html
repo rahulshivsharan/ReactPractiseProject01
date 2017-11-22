@@ -1,0 +1,49 @@
+<html>
+	<head>
+		<title>React Template</title>
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">			
+	</head>
+	<body>
+		<!-- Body Content -->
+		<div id="mainContainer01"></div>
+		<div id="mainContainer02"></div>
+		<!-- The core React library -->
+		<script src="/node_modules/react/dist/react.min.js"></script>
+		<!-- The ReactDOM Library -->
+		<script src="/node_modules/react-dom/dist/react-dom.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.js"></script>
+		
+		<script type="text/javaScript">
+			(function(){
+				'use strict'
+				
+				ReactDOM.render(
+					React.createElement("h1",
+										{ 
+											"id" : "my-heading01", 
+											"style" : { 
+													"color" : "blue",
+													"font-size" : "100px" 
+											} 
+										},
+										React.createElement("span",{ 
+												"style" : { 
+														"color": "red", 
+														"font-size" : "50px" 
+												} 
+										},"Hello"),
+										"World"),
+					document.getElementById("mainContainer01")
+				);
+			})();	
+		</script>
+		<script type="text/babel">
+			ReactDOM.render(
+				<h1 id='my-heading02' style={{color : 'red',fontSize : '100px'}}>
+					<span style={{color : 'blue',fontSize : '50px'}}>Thane</span>
+					West
+				</h1>
+			,document.getElementById("mainContainer02"));
+		</script>
+	</body>
+</html>
