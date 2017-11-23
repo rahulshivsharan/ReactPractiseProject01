@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>React Template</title>
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">			
+	</head>
+	<body>
+		<!-- Body Content -->
+
+		<div class="w3-container" style="margin-top:3%">
+			<div class="w3-row">
+				<div class="w3-col m2">&nbsp;</div>
+				<div class="w3-col m8">
+					<form class="w3-container">
+						<label>Name</label>
+						<input type="text" class="w3-input" id="employeeName" />
+
+						<label>Profession</label>
+						<input type="text" class="w3-input" id="profession" />
+						<br/>
+						<button class="w3-btn w3-blue"
+								type="button" 
+								id="enterBtn">Enter</button>
+					</form>
+					<br/>
+					<div id="employee-container"></div>
+				</div>
+			</div>
+		</div>
+
+		<!-- The core React library -->
+		<script src="/node_modules/react/dist/react.js"></script>
+		<!-- The ReactDOM Library -->
+		<script src="/node_modules/react-dom/dist/react-dom.js"></script>
+		<!-- JSX Interpreter -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.js"></script>
+		<script type="text/babel">
+			(function(){
+				'use strict'
+				// custom javaScript content
+
+				var employeeList = [];
+				employeeList.push({
+					"name" : "Stevens Kimberly",
+					"profession" : "Lab Technician"
+				});				
+
+				var employeeTableComponent = React.createClass({
+					propType : {
+						initialValue : React.PropTypes.array.isRequired
+					},
+					getDefaultProps : function(){
+						return {
+							"list" : employeeList
+						}
+					},
+					getInitialState : function(){
+						return {
+							"list" : this.props.initialValue
+						}
+					},
+					componentWillRecieveProps : function(newProps){
+						this.setState({
+							"list" : newProps.initialValue
+						});
+					},
+					render : function(){
+						var myList = this.state.list;
+						var rowList = [];
+						for(var x = 0; x < myList.length; x++){
+							rowList.push(
+								<tr>
+									<td>{myList[x]['name']}</td>
+									<td>{myList[x]['profession']}</td>
+								</tr>
+							);	
+						}
+						
+						return (
+							<table className='w3-table w3-table-all'>
+								<tr>
+									<th>Name</th>
+									<th>Profession</th>	
+								</tr>
+								{rowList}								
+							</table>	
+						);												
+					}					
+				});
+
+				var employeeTableElement = React.createElement(employeeTableComponent,{
+					"initialValue" : employeeList
+				});
+
+				var myContainer = document.getElementById("employee-container");
+				var employeeElementRef = ReactDOM.render(employeeTableElement,myContainer);									
+
+				document.getElementById("enterBtn").addEventListener("click",function(evt){
+					employeeList.push({
+						"name" : document.getElementById("employeeName").value,
+						"profession" : document.getElementById("profession").value
+					});
+
+					document.getElementById("employeeName").value = "";
+					document.getElementById("profession").value = "";
+					
+					employeeElementRef.componentWillRecieveProps({
+						"initialValue" : employeeList
+					});
+				});				
+
+			})();	
+		</script>
+	</body>
+</html>
